@@ -32,6 +32,11 @@ func main() {
 		lines = append(lines, scanner.Text())
 	}
 
+	if len(lines) == 0 {
+		fmt.Println("File is empty")
+		return
+	}
+
 	if err := scanner.Err(); err != nil {
 		fmt.Println(err)
 		return
