@@ -13,7 +13,7 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: go run main.go <datafile>")
+		fmt.Println("go run main.go <data.txt>")
 		return
 	}
 
@@ -29,9 +29,11 @@ func main() {
 	var lines []string
 	scanner := bufio.NewScanner(openFile)
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		line := scanner.Text()
+		if strings.TrimSpace(line) != "" { // Skip empty lines
+			lines = append(lines, line)
+		}
 	}
-
 	if len(lines) == 0 {
 		fmt.Println("File is empty")
 		return
@@ -57,11 +59,11 @@ func main() {
 	average := Math.CalculateAverage(data)
 	median := Math.CalculateMedian(data)
 	variance := Math.CalculateVariance(data, average)
-	stdDev := math.Sqrt(variance)
+	standardDeviation := math.Sqrt(variance)
 
 	// Print the results
 	fmt.Printf("Average: %d\n", int(math.Round(average)))
 	fmt.Printf("Median: %d\n", int(math.Round(median)))
 	fmt.Printf("Variance: %d\n", int(math.Round(variance)))
-	fmt.Printf("Standard Deviation: %d\n", int(math.Round(stdDev)))
+	fmt.Printf("Standard Deviation: %d\n", int(math.Round(standardDeviation)))
 }
